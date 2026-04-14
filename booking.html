@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment — Gllow Beauty  Salon & Academy </title>
+  <meta name="description" content="Book your salon appointment in Kandivali West easily.">
+  <meta property="og:title" content="Book Appointment -  Gllow Beauty  Salon & Academy">
+  <meta property="og:image" content="{{ url_for('static', filename='images/logo.jpeg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="/" class="logo">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Gllow Salon Logo">
+    <span> Gllow Beauty  Salon & Academy</span>
+  </a>
+
+  <div class="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/about">About</a>
+    <a href="/courses">Courses</a>
+    <a href="/contact">Contact</a>
+    <a href="/booking" class="btn-nav">Book Now</a>
+  </div>
+</nav>
+
+<!-- FORM -->
+<div class="container">
+  <p class="section-label text-center">Appointments</p>
+  <h1 class="section-title text-center">Book Your <em>Appointment</em></h1>
+  <div class="rule"></div>
+
+  <form action="/submit" method="POST">
+
+    <label>Full Name</label>
+    <input type="text" name="name" required>
+
+    <label>Phone Number</label>
+    <input type="tel" name="phone" pattern="[0-9]{10}" required>
+
+    <label>Email (optional)</label>
+    <input type="email" name="email">
+
+    <label>Select Service</label>
+    <select name="services" id="serviceSelect" required>
+      <option value="" disabled selected>— Choose a service —</option>
+
+      <!-- HAIR -->
+      <optgroup label="✂ Hair Services">
+        <option value="Hair Cut">Hair Cut — ₹149</option>
+        <option value="Hair Cut Advance">Hair Cut Advance — ₹299</option>
+        <option value="Hair Wash">Hair Wash + Blast Dry — ₹249</option>
+        <option value="Blow Dry">Blow Dry — ₹199</option>
+        <option value="Hair Spa">Hair Spa — ₹500</option>
+        <option value="Styling">Styling — ₹499</option>
+        <option value="Root Touch">Root Touch — ₹799</option>
+        <option value="Highlight">Highlight — ₹1999</option>
+        <option value="Global">Global — ₹1999</option>
+        <option value="Balayage">Balayage — ₹2499</option>
+        <option value="Keratin">Keratin — ₹1999</option>
+        <option value="Botox">Botox — ₹2999</option>
+        <option value="Straightening">Straightening — ₹2999</option>
+        <option value="Smoothening">Smoothening — ₹2999</option>
+        <option value="Nano Treatment">Nano Treatment — ₹3999</option>
+      </optgroup>
+
+      <!-- SKIN -->
+      <optgroup label="✨ Skin & Face">
+        <option value="Eyebrow Threading">Eyebrow — ₹50</option>
+        <option value="Upper Lip">Upper Lip — ₹29</option>
+        <option value="Upper Wax">Upper Wax — ₹49</option>
+        <option value="Forehead">Forehead — ₹49</option>
+        <option value="Full Face Threading">Full Face — ₹249</option>
+        <option value="Clean Up">Clean Up — ₹250</option>
+        <option value="VLCC Facial">VLCC Facial — ₹599</option>
+        <option value="Oxylife Facial">Oxylife Facial — ₹999</option>
+        <option value="O3 Facial">O3 Facial — ₹1999</option>
+      </optgroup>
+
+      <!-- WAXING -->
+      <optgroup label="🧴 Waxing (Rica / Honey)">
+        <option value="Under Arms Wax">Under Arms</option>
+        <option value="Half Hands Wax">Half Hands</option>
+        <option value="Half Legs Wax">Half Legs</option>
+        <option value="Full Arms Wax">Full Arms</option>
+        <option value="Full Legs Wax">Full Legs</option>
+        <option value="Full Body Wax">Full Body Wax</option>
+      </optgroup>
+
+      <!-- MASSAGE -->
+      <optgroup label="💆 Massage">
+        <option value="Head Massage">Head Massage (20 min) — ₹299</option>
+        <option value="Foot Massage">Foot Massage (15 min) — ₹199</option>
+      </optgroup>
+
+      <!-- NAILS -->
+      <optgroup label="💅 Nails">
+        <option value="Basic Manicure">Basic Manicure — ₹399</option>
+        <option value="Advance Manicure">Advance Manicure — ₹649</option>
+        <option value="Basic Pedicure">Basic Pedicure — ₹500</option>
+        <option value="Advance Pedicure">Advance Pedicure — ₹999</option>
+        <option value="Mani Pedi Combo">Mani + Pedi — ₹999</option>
+
+        <option value="Gel Polish Hands">Gel Polish Hands — ₹249</option>
+        <option value="Gel Polish Feet">Gel Polish Feet — ₹299</option>
+        <option value="Gel Removal">Gel Removal — ₹99</option>
+        <option value="Nail Repair">Nail Repair — ₹79</option>
+        <option value="Gel Extension">Gel Extension — ₹999</option>
+        <option value="Acrylic Nails">Acrylic Nails — ₹999</option>
+        <option value="Polygel Nails">Polygel Nails — ₹999</option>
+        <option value="Extension Refill">Extension Refill — ₹499</option>
+      </optgroup>
+
+      <!-- COMBOS -->
+      <optgroup label="🎁 Combos">
+        <option value="Hair Wash Blow Dry Combo">Hair Wash + Blow Dry — ₹349</option>
+        <option value="Hair Combo">Hair Cut + Wash + Blow Dry — ₹449</option>
+        <option value="Global Highlight Combo">Global + Highlight — ₹3499</option>
+        <option value="Balayage Combo">Balayage + Global — ₹3999</option>
+      </optgroup>
+
+      <!-- WELLNESS -->
+      <optgroup label="🛁 Wellness">
+        <option value="Steam Shower">Steam Shower — ₹499</option>
+      </optgroup>
+
+      <!-- BRIDAL -->
+      <optgroup label="👰 Bridal & Occasions">
+        <option value="Bridal Makeup">Bridal Makeup</option>
+        <option value="Engagement Makeup">Engagement Makeup</option>
+        <option value="Party Makeup">Party Makeup</option>
+      </optgroup>
+
+    </select>
+
+    <label>Extra Notes</label>
+    <textarea name="manual_service" rows="3"></textarea>
+
+    <label>Date</label>
+    <input type="date" name="date" id="dateField" required>
+
+    <label>Time</label>
+    <input type="time" name="time" required>
+
+    <button type="submit" class="btn btn-primary" style="width:100%; margin-top:20px;">
+      Confirm Appointment
+    </button>
+
+  </form>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h2> Gllow Beauty  Salon & Academy</h2>
+  <p>📞 +91 98195 45630</p>
+  <p>📍 Kandivali West, Mumbai</p>
+</footer>
+
+<script>
+window.onload = function () {
+  const params = new URLSearchParams(window.location.search);
+  const service = params.get("service");
+  if (service) {
+    document.getElementById("serviceSelect").value = service;
+  }
+
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById("dateField").setAttribute("min", today);
+};
+
+function toggleNav() {
+  document.getElementById("navLinks").classList.toggle("open");
+}
+</script>
+
+</body>
+</html>

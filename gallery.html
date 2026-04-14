@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Gllow Beauty Salon & Academy</title>
+  <meta name="description" content="Explore our salon work — hair, makeup, nails and more.">
+  <meta property="og:title" content="Gllow Salon Gallery">
+  <meta property="og:image" content="{{ url_for('static', filename='images/logo.jpeg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <style>
+    /* ── REEL THUMBNAIL GRID ── */
+    .reel-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .reel-thumb {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #111;
+      border: 1px solid rgba(201,168,76,0.25);
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .reel-thumb:hover {
+      border-color: #C9A84C;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    }
+
+    /* The hidden <video> used only for thumbnail capture */
+    .reel-thumb video.thumb-src {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Canvas renders the captured frame */
+    .reel-thumb canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    /* Fallback gradient shown while thumbnail loads */
+    .reel-thumb .thumb-fallback {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0f0f0f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .reel-thumb .thumb-fallback .reel-icon {
+      font-size: 28px;
+      opacity: 0.4;
+    }
+
+    .reel-thumb .thumb-fallback .reel-label {
+      font-size: 11px;
+      color: #555;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Play button overlay */
+    .reel-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.28);
+      transition: background 0.3s ease;
+      border-radius: 12px;
+    }
+
+    .reel-thumb:hover .reel-play {
+      background: rgba(0,0,0,0.45);
+    }
+
+    .play-btn {
+      width: 52px;
+      height: 52px;
+      background: rgba(201,168,76,0.92);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease, background 0.25s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .reel-thumb:hover .play-btn {
+      transform: scale(1.12);
+      background: #C9A84C;
+    }
+
+    .play-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #080808;
+      margin-left: 3px;
+    }
+
+    /* Reel number badge */
+    .reel-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.65);
+      color: rgba(201,168,76,0.85);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      text-transform: uppercase;
+    }
+
+    /* ── VIDEO MODAL ── */
+    .video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.94);
+      backdrop-filter: blur(10px);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .video-modal.open { display: flex; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .modal-inner {
+      position: relative;
+      width: min(380px, 90vw);
+      aspect-ratio: 9/16;
+    }
+
+    .modal-inner video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #000;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -44px;
+      right: 0;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+      opacity: 0.7;
+      font-weight: 300;
+      line-height: 1;
+      transition: opacity 0.2s;
+    }
+
+    .modal-close:hover { opacity: 1; color: #C9A84C; }
+
+    /* nav arrows */
+    .modal-prev,
+    .modal-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: #C9A84C;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s;
+    }
+
+    .modal-prev { left: -54px; }
+    .modal-next { right: -54px; }
+
+    .modal-prev:hover,
+    .modal-next:hover { background: rgba(201,168,76,0.35); }
+
+    /* Reel counter */
+    .modal-counter {
+      position: absolute;
+      bottom: -36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: rgba(201,168,76,0.6);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .reel-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .modal-prev { left: -44px; }
+      .modal-next { right: -44px; }
+    }
+
+    @media (max-width: 480px) {
+      .reel-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .modal-inner { width: 92vw; }
+      .modal-prev { left: -36px; }
+      .modal-next { right: -36px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="/" class="logo">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Salon Logo">
+    <span>Gllow Beauty Salon & Academy</span>
+  </a>
+  <div class="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/about">About</a>
+    <a href="/courses">Courses</a>
+    <a href="/contact">Contact</a>
+    <a href="/booking" class="btn-nav">Book Now</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="container text-center">
+  <p class="section-label">Our Portfolio</p>
+  <h1 class="section-title">Our <em>Work</em></h1>
+  <div class="rule"></div>
+  <p class="section-sub">Every look crafted with precision and passion</p>
+</div>
+
+<!-- PHOTOS -->
+<div class="container">
+  <p class="section-label">Transformations</p>
+  <h2 class="section-title">Photo <em>Gallery</em></h2>
+  <div class="gallery">
+    <img src="{{ url_for('static', filename='images/work4.jpeg') }}"  alt="Salon Work" onclick="openPopup(this.src)">
+    <img src="{{ url_for('static', filename='images/work11.jpeg') }}" alt="Salon Work" onclick="openPopup(this.src)">
+    <img src="{{ url_for('static', filename='images/work12.jpeg') }}" alt="Salon Work" onclick="openPopup(this.src)">
+    <img src="{{ url_for('static', filename='images/work14.jpeg') }}" alt="Salon Work" onclick="openPopup(this.src)">
+    <img src="{{ url_for('static', filename='images/work15.jpeg') }}" alt="Salon Work" onclick="openPopup(this.src)">
+    <img src="{{ url_for('static', filename='images/work18.jpeg') }}" alt="Salon Work" onclick="openPopup(this.src)">
+    <img src="{{ url_for('static', filename='images/work21.jpeg') }}" alt="Salon Work" onclick="openPopup(this.src)">
+    <img src="{{ url_for('static', filename='images/work22.jpeg') }}" alt="Salon Work" onclick="openPopup(this.src)">
+    <img src="{{ url_for('static', filename='images/work24.jpeg') }}" alt="Salon Work" onclick="openPopup(this.src)">
+  </div>
+</div>
+
+<!-- REELS — thumbnail grid -->
+<!-- YOUTUBE REELS -->
+<div class="container">
+  <p class="section-label">Behind the Scenes</p>
+  <h2 class="section-title">Salon <em>Reels</em></h2>
+    <iframe height="350" src="https://www.youtube.com/embed/TBMIUdXoHaU"></iframe>
+
+    <iframe height="350" src="https://www.youtube.com/embed/66-A0k-6uGc"></iframe>
+
+    <iframe height="350" src="https://www.youtube.com/embed/eS9J1VsZG0I"></iframe>
+
+    <iframe height="350" src="https://www.youtube.com/embed/F1tIlfYCsVQ"></iframe>
+
+    <iframe height="350" src="https://www.youtube.com/embed/uunb1UVwj5M"></iframe>
+
+  </div>
+</div>
+
+<!-- IMAGE POPUP -->
+<div id="popup" class="popup" onclick="closePopup()">
+  <span class="close">&times;</span>
+  <img id="popup-img" class="popup-img">
+</div>
+
+<!-- FLOATING -->
+<a href="https://wa.me/919819545630" class="floating-whatsapp" target="_blank">💬</a>
+<button onclick="scrollTopFunc()" class="top-btn">↑</button>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h2>Gllow Beauty Salon & Academy</h2>
+  <p>Exclusive Women's Beauty Salon in Kandivali West, Mumbai</p>
+  <p>📞 +91 98195 45630</p>
+<p>📍 Shop No 1, Vardhaman Kutir, Shankar Lane, Kandivali West, Mumbai</p>
+<p>🕒 Open: 11 AM – 8 PM (All Days)</p>
+  <div class="socials">
+    <a href="https://www.instagram.com/_gllow_beauty_salon_?igsh=MWc0cTFhaWJvcHBlYQ==" target="_blank">Instagram</a>
+    <a href="https://wa.me/919819545630" target="_blank">WhatsApp</a>
+    <a href="https://maps.app.goo.gl/AGz8FnccqGcKP7ES8" target="_blank">Location</a>
+  </div>
+  <p class="copy">© 2026 Gllow Beauty Salon & Academy</p>
+</footer>
+
+<script>
+/* ── IMAGE POPUP ── */
+function openPopup(src) {
+  document.getElementById("popup").style.display = "flex";
+  document.getElementById("popup-img").src = src;
+}
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+/* ── UTILS ── */
+function scrollTopFunc() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function toggleNav()     { document.getElementById("navLinks").classList.toggle("open"); }
+</script>
+</body>
+</html>

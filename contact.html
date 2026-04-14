@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Gllow Beauty Salon & Academy</title>
+  <meta name="description" content="Contact Gllow Beauty Salon in Kandivali West. Call, WhatsApp or send a message.">
+  <meta property="og:title" content="Contact — Gllow Salon">
+  <meta property="og:image" content="{{ url_for('static', filename='images/logo.jpeg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="/" class="logo">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Gllow Salon Logo">
+    <span>Gllow Beauty Salon & Academy</span>
+  </a>
+  <div class="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/about">About</a>
+    <a href="/courses">Courses</a>
+    <a href="/contact">Contact</a>
+    <a href="/booking" class="btn-nav">Book Now</a>
+  </div>
+</nav>
+
+<!-- CONTACT FORM -->
+<div class="container">
+  <p class="section-label">Get in Touch</p>
+  <h1 class="section-title">Contact <em>Us</em></h1>
+  <div class="rule"></div>
+  <p class="section-sub text-center">We'd love to hear from you</p>
+
+  <form action="/contact_submit" method="POST">
+
+    <label>Full Name</label>
+    <input type="text" name="name" placeholder="Your name" required>
+
+    <label>Phone Number</label>
+    <input type="tel" name="phone" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+
+    <label>Email Address</label>
+    <input type="email" name="email" placeholder="you@email.com" required>
+
+    <label>Your Message</label>
+    <textarea name="message" rows="5" placeholder="How can we help you?" required></textarea>
+
+    <button type="submit" class="btn btn-primary" style="margin-top:24px; width:100%; font-size:14px; padding:16px;">
+      Send Message
+    </button>
+
+  </form>
+</div>
+
+<!-- QUICK CONTACT -->
+<div class="container text-center">
+  <p class="section-label">Reach Us Directly</p>
+  <h2 class="section-title">Quick <em>Contact</em></h2>
+  <div class="rule"></div>
+  <div class="contact-buttons">
+    <a href="tel:919819545630" class="btn btn-outline">📞 Call Now</a>
+    <a href="https://wa.me/919819545630" target="_blank" class="btn btn-primary">💬 WhatsApp</a>
+    <a href="mailto:Gllowkandivali@gmail.com" class="btn btn-outline">📧 Email Us</a>
+  </div>
+</div>
+
+<!-- FLOATING -->
+<a href="https://wa.me/919819545630" class="floating-whatsapp" target="_blank">💬</a>
+<button onclick="scrollTopFunc()" class="top-btn">↑</button>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h2>Gllow Beauty Salon & Academy</h2>
+  <p>📞 +91 98195 45630 &nbsp;|&nbsp; Kandivali West, Mumbai</p>
+<p>📍 Shop No 1, Vardhaman Kutir, Shankar Lane, Kandivali West, Mumbai</p>
+<p>🕒 Open: 11 AM – 8 PM (All Days)</p>
+  <div class="socials">
+    <a href="https://www.instagram.com/_gllow_beauty_salon_?igsh=MWc0cTFhaWJvcHBlYQ==" target="_blank">Instagram</a>
+    <a href="https://wa.me/919819545630" target="_blank">WhatsApp</a>
+    <a href="https://maps.app.goo.gl/AGz8FnccqGcKP7ES8" target="_blank">Location</a>
+  </div>
+  <p class="copy">© 2026 Gllow Beauty Salon & Academy</p>
+</footer>
+
+<script>
+function scrollTopFunc() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function toggleNav() { document.getElementById("navLinks").classList.toggle("open"); }
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — Gllow Beauty Salon & Academy</title>
+  <meta name="description" content="Explore our full range of salon services in Kandivali West.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="/" class="logo">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Gllow Salon Logo">
+    <span>Gllow Beauty Salon & Academy</span>
+  </a>
+
+  <div class="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/about">About</a>
+    <a href="/courses">Courses</a>
+    <a href="/contact">Contact</a>
+    <a href="/booking" class="btn-nav">Book Now</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="container text-center">
+  <p class="section-label">What We Offer</p>
+  <h1 class="section-title">Our <em>Services</em></h1>
+  <div class="rule"></div>
+</div>
+
+<!-- HAIR -->
+<div class="service-box">
+  <h2>✂ Hair Services</h2>
+
+  <div class="service-item"><span>Hair Cut</span><span>₹149</span><a href="/booking?service=Hair Cut" class="btn">Book</a></div>
+  <div class="service-item"><span>Hair Cut Advance</span><span>₹299</span><a href="/booking?service=Hair Cut Advance" class="btn">Book</a></div>
+  <div class="service-item"><span>Hair Wash + Blast Dry</span><span>₹249</span><a href="/booking?service=Hair Wash" class="btn">Book</a></div>
+  <div class="service-item"><span>Blow Dry</span><span>₹199</span><a href="/booking?service=Blow Dry" class="btn">Book</a></div>
+  <div class="service-item"><span>Hair Spa</span><span>₹500</span><a href="/booking?service=Hair Spa" class="btn">Book</a></div>
+</div>
+
+<!-- SKIN -->
+<div class="service-box">
+  <h2>✨ Skin & Face</h2>
+
+  <div class="service-item"><span>Eyebrow Threading</span><span>₹50</span><a href="/booking?service=Eyebrow" class="btn">Book</a></div>
+  <div class="service-item"><span>Upper Lip</span><span>₹29</span><a href="/booking?service=Upper Lip" class="btn">Book</a></div>
+  <div class="service-item"><span>Upper Wax</span><span>₹49</span><a href="/booking?service=Upper Wax" class="btn">Book</a></div>
+  <div class="service-item"><span>Forehead</span><span>₹49</span><a href="/booking?service=Forehead" class="btn">Book</a></div>
+  <div class="service-item"><span>Full Face Threading</span><span>₹249</span><a href="/booking?service=Full Face" class="btn">Book</a></div>
+</div>
+
+<!-- WAXING -->
+<div class="service-box">
+  <h2>🧴 Waxing</h2>
+
+  <div class="service-item"><span>Under Arms</span><span>Rica ₹119 / Honey ₹79</span><a href="/booking?service=Under Arms Wax" class="btn">Book</a></div>
+  <div class="service-item"><span>Half Hands</span><span>Rica ₹249 / Honey ₹199</span><a href="/booking?service=Half Hands Wax" class="btn">Book</a></div>
+  <div class="service-item"><span>Half Legs</span><span>Rica ₹399 / Honey ₹299</span><a href="/booking?service=Half Legs Wax" class="btn">Book</a></div>
+  <div class="service-item"><span>Full Arms</span><span>Rica ₹299 / Honey ₹249</span><a href="/booking?service=Full Arms Wax" class="btn">Book</a></div>
+  <div class="service-item"><span>Full Legs</span><span>Rica ₹499 / Honey ₹399</span><a href="/booking?service=Full Legs Wax" class="btn">Book</a></div>
+  <div class="service-item"><span>Full Body Wax</span><span>Rica ₹2399 / Honey ₹1799</span><a href="/booking?service=Full Body Wax" class="btn">Book</a></div>
+</div>
+
+<!-- MASSAGE -->
+<div class="service-box">
+  <h2>💆 Massage</h2>
+
+  <div class="service-item"><span>Head Massage (20 min)</span><span>₹299</span><a href="/booking?service=Head Massage" class="btn">Book</a></div>
+  <div class="service-item"><span>Foot Massage (15 min)</span><span>₹199</span><a href="/booking?service=Foot Massage" class="btn">Book</a></div>
+</div>
+
+<!-- NAILS -->
+<div class="service-box">
+  <h2>💅 Nails</h2>
+
+  <div class="service-item"><span>Basic Manicure</span><span>₹399</span><a href="/booking?service=Basic Manicure" class="btn">Book</a></div>
+  <div class="service-item"><span>Advance Manicure</span><span>₹649</span><a href="/booking?service=Advance Manicure" class="btn">Book</a></div>
+  <div class="service-item"><span>Basic Pedicure</span><span>₹500</span><a href="/booking?service=Basic Pedicure" class="btn">Book</a></div>
+  <div class="service-item"><span>Advance Pedicure</span><span>₹999</span><a href="/booking?service=Advance Pedicure" class="btn">Book</a></div>
+  <div class="service-item"><span>Mani + Pedi Combo</span><span>₹999</span><a href="/booking?service=Mani Pedi Combo" class="btn">Book</a></div>
+</div>
+
+<!-- COMBOS -->
+<div class="service-box">
+  <h2>🎁 Combos</h2>
+
+  <div class="service-item"><span>Hair Wash + Blow Dry</span><span>₹349</span><a href="/booking?service=Hair Wash Blow Dry Combo" class="btn">Book</a></div>
+  <div class="service-item"><span>Hair Cut + Hair Wash + Blow Dry</span><span>₹449</span><a href="/booking?service=Hair Combo" class="btn">Book</a></div>
+  <div class="service-item"><span>Global + Highlight</span><span>₹3499</span><a href="/booking?service=Global Highlight Combo" class="btn">Book</a></div>
+  <div class="service-item"><span>Balayage + Global</span><span>₹3999</span><a href="/booking?service=Balayage Combo" class="btn">Book</a></div>
+</div>
+
+<!-- WELLNESS -->
+<div class="service-box">
+  <h2>🛁 Wellness</h2>
+
+  <div class="service-item"><span>Steam Shower</span><span>₹499</span><a href="/booking?service=Steam Shower" class="btn">Book</a></div>
+</div>
+
+<!-- BRIDAL -->
+<div class="bridal-box">
+  <h2>👰 Bridal & Occasion Makeup</h2>
+  <p>Make your special day unforgettable with our expert bridal artists</p>
+  <p class="bridal-highlight">Bridal · Engagement · Party Makeup</p>
+  <p style="margin-top:10px; color:var(--text-muted);">
+    Full consultation included — customised for your skin tone & style
+  </p>
+
+  <a href="/booking?service=Bridal Makeup" class="bridal-btn">
+    Book Bridal Consultation
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h2>Gllow Beauty Salon & Academy</h2>
+  <p>📞 +91 98195 45630</p>
+  <p>📍 Kandivali West, Mumbai</p>
+  <p>🕒 11 AM – 8 PM</p>
+</footer>
+
+<script>
+function toggleNav() {
+  document.getElementById("navLinks").classList.toggle("open");
+}
+</script>
+
+</body>
+</html>

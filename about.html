@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Gllow Beauty Salon & Academy</title>
+  <meta name="description" content="Best beauty salon in Kandivali West offering hair, skincare, makeup and more.">
+  <meta property="og:title" content="About — Gllow Beauty Salon & Academy">
+  <meta property="og:image" content="{{ url_for('static', filename='images/logo.jpeg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="/" class="logo">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Gllow Salon Logo">
+    <span>Gllow Beauty Salon & Academy</span>
+  </a>
+  <div class="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/about">About</a>
+    <a href="/courses">Courses</a>
+    <a href="/contact">Contact</a>
+    <a href="/booking" class="btn-nav">Book Now</a>
+  </div>
+</nav>
+
+<!-- ABOUT -->
+<div class="container">
+  <p class="section-label">Our Story</p>
+  <h1 class="section-title">About <em>Gllow</em></h1>
+  <div class="rule"></div>
+
+  <div style="max-width:620px; margin: 36px auto 0; display:flex; flex-direction:column; gap:20px;">
+    <p style="font-size:17px; line-height:1.8; color:var(--white);">
+      Welcome to <strong style="color:var(--gold);">Gllow Beauty Salon & Academy</strong> — your trusted destination for beauty,
+      style, and confidence in Kandivali West.
+    </p>
+    <p style="font-size:15px; line-height:1.8; color:var(--text-muted);">
+      We offer professional salon services including hair styling, skincare, nails, waxing, and more — all at affordable prices.
+    </p>
+    <p style="font-size:15px; line-height:1.8; color:var(--text-muted);">
+      Our mission is to make every client feel confident, beautiful, and relaxed. We focus on hygiene, quality service, and the latest trends in beauty.
+    </p>
+  </div>
+</div>
+
+<!-- WHY US -->
+<div class="container text-center">
+  <p class="section-label">Our Promise</p>
+  <h2 class="section-title">Why Choose <em>Us</em></h2>
+  <div class="rule"></div>
+
+  <ul class="why-list">
+    <li>✔&nbsp;&nbsp; Affordable Prices for Every Budget</li>
+    <li>✔&nbsp;&nbsp; Professional & Trained Staff</li>
+    <li>✔&nbsp;&nbsp; Clean, Hygienic & Safe Salon</li>
+    <li>✔&nbsp;&nbsp; Latest Styles & Beauty Trends</li>
+    <li>✔&nbsp;&nbsp; Warm, Friendly Environment</li>
+  </ul>
+</div>
+
+<!-- CTA -->
+<div class="container text-center">
+  <h2 class="section-title">Ready to <em>Gllow?</em></h2>
+  <div class="rule"></div>
+  <a href="/booking" class="btn btn-primary" style="margin-top:16px; display:inline-block;">Book Your Appointment</a>
+</div>
+
+<!-- FLOATING BUTTONS -->
+<button onclick="goBack()" class="back-btn" title="Go back">←</button>
+<button onclick="scrollTopFunc()" class="top-btn" title="Top">↑</button>
+<a href="https://wa.me/919819545630" class="floating-whatsapp" target="_blank">💬</a>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h2>Gllow Beauty Salon & Academy</h2>
+  <p>Exclusive Women's Beauty Salon in Kandivali West, Mumbai</p>
+  <p>📞 +91 98195 45630</p>
+<p>📍 Shop No 1, Vardhaman Kutir, Shankar Lane, Kandivali West, Mumbai</p>
+<p>🕒 Open: 11 AM – 8 PM (All Days)</p>
+  <div class="socials">
+    <a href="https://www.instagram.com/_gllow_beauty_salon_?igsh=MWc0cTFhaWJvcHBlYQ==" target="_blank">Instagram</a>
+    <a href="https://wa.me/919819545630" target="_blank">WhatsApp</a>
+    <a href="https://maps.app.goo.gl/AGz8FnccqGcKP7ES8" target="_blank">Location</a>
+  </div>
+  <p class="copy">© 2026 Gllow Beauty Salon & Academy. All Rights Reserved.</p>
+</footer>
+
+<script>
+function goBack() { window.history.back(); }
+function scrollTopFunc() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function toggleNav() { document.getElementById("navLinks").classList.toggle("open"); }
+</script>
+</body>
+</html>

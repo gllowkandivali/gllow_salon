@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses — Gllow Beauty Academy</title>
+  <meta name="description" content="Learn beauty courses in Kandivali West. Makeup, hair, nail art & professional training.">
+  <meta property="og:title" content="Gllow Salon Courses">
+  <meta property="og:image" content="{{ url_for('static', filename='images/logo.jpeg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="/" class="logo">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Gllow Salon Logo">
+    <span>Gllow Beauty Salon & Academy</span>
+  </a>
+  <div class="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/gallery">Gallery</a>
+    <a href="/about">About</a>
+    <a href="/courses">Courses</a>
+    <a href="/contact">Contact</a>
+    <a href="/register" class="btn-nav">Register Now</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="container text-center">
+  <p class="section-label">Gllow Academy</p>
+  <h1 class="section-title">Professional Beauty <em>Courses</em></h1>
+  <div class="rule"></div>
+  <p class="section-sub">Learn professional beauty skills & start your career</p>
+</div>
+
+<!-- COURSES GRID -->
+<div class="container">
+  <div class="courses-grid">
+
+    <div class="course-card">
+      <h2>1 Day Self-Makeup</h2>
+      <p>✔ Self makeup from your personal vanity kit — perfect for beginners & home use.</p>
+      <div class="course-meta">
+        <span>Duration: 1 Day</span>
+        <span>₹1,999</span>
+      </div>
+      <a href="https://wa.me/919819545630" class="btn btn-outline" style="font-size:12px; padding:10px 20px; margin-top:14px; text-align:center;">Enquire Now</a>
+    </div>
+
+    <div class="course-card">
+      <h2>Basic Beauty Course</h2>
+      <p>✔ Facial &nbsp;✔ Clean Up &nbsp;✔ Waxing &nbsp;✔ Threading<br>Master the core salon services.</p>
+      <div class="course-meta">
+        <span>Duration: 1 Month</span>
+        <span>₹4,999</span>
+      </div>
+      <a href="https://wa.me/919819545630" class="btn btn-outline" style="font-size:12px; padding:10px 20px; margin-top:14px; text-align:center;">Enquire Now</a>
+    </div>
+
+    <div class="course-card">
+      <h2>Advanced Beauty Course</h2>
+      <p>✔ All Basic Services &nbsp;✔ Advanced Facials &nbsp;✔ Hair Spa &nbsp;✔ Hair Treatments</p>
+      <div class="course-meta">
+        <span>Duration: 2 Months</span>
+        <span>₹25,000</span>
+      </div>
+      <a href="https://wa.me/919819545630" class="btn btn-outline" style="font-size:12px; padding:10px 20px; margin-top:14px; text-align:center;">Enquire Now</a>
+    </div>
+
+    <div class="course-card">
+      <h2>Professional Hair Course</h2>
+      <p>✔ Hair Cut &nbsp;✔ Styling &nbsp;✔ Coloring &nbsp;✔ Hair Science &nbsp;✔ Certified Degree</p>
+      <div class="course-meta">
+        <span>Duration: 3 Months</span>
+        <span>₹50,000</span>
+      </div>
+      <a href="https://wa.me/919819545630" class="btn btn-outline" style="font-size:12px; padding:10px 20px; margin-top:14px; text-align:center;">Enquire Now</a>
+    </div>
+
+    <div class="course-card">
+      <h2>Nail Art Course</h2>
+      <p>✔ Gel Polish &nbsp;✔ Nail Extensions &nbsp;✔ Nail Art Designs</p>
+      <div class="course-meta">
+        <span>Duration: 15 Days</span>
+        <span>₹5,000</span>
+      </div>
+      <a href="https://wa.me/919819545630" class="btn btn-outline" style="font-size:12px; padding:10px 20px; margin-top:14px; text-align:center;">Enquire Now</a>
+    </div>
+
+    <div class="course-card">
+      <h2>Advanced Nail Art</h2>
+      <p>✔ Gel Polish &nbsp;✔ Nail Extensions &nbsp;✔ Advanced Designs &nbsp;✔ All Types & Styles</p>
+      <div class="course-meta">
+        <span>Duration: 1 Month</span>
+        <span>₹25,000</span>
+      </div>
+      <a href="https://wa.me/919819545630" class="btn btn-outline" style="font-size:12px; padding:10px 20px; margin-top:14px; text-align:center;">Enquire Now</a>
+    </div>
+
+    <div class="course-card">
+      <h2>Salon Management</h2>
+      <p>✔ Everything about running a professional salon — from operations to client management.</p>
+      <div class="course-meta">
+        <span>Duration: 8–10 Days</span>
+        <span>₹10,000</span>
+      </div>
+      <a href="https://wa.me/919819545630" class="btn btn-outline" style="font-size:12px; padding:10px 20px; margin-top:14px; text-align:center;">Enquire Now</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="container text-center">
+  <h2 class="section-title">Start Your Career <em>With Us</em></h2>
+  <div class="rule"></div>
+  <p class="section-sub">Limited seats available — enroll now</p>
+  <a href="/register" class="btn btn-primary" style="margin-top:24px; display:inline-block;">Register Now</a>
+</div>
+
+<!-- FLOATING -->
+<a href="https://wa.me/919819545630" class="floating-whatsapp" target="_blank">💬</a>
+<button onclick="scrollTopFunc()" class="top-btn">↑</button>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h2>Gllow Beauty Salon & Academy</h2>
+  <p>Professional Training in Kandivali West</p>
+  <p>📞 +91 98195 45630</p>
+<p>📍 Shop No 1, Vardhaman Kutir, Shankar Lane, Kandivali West, Mumbai</p>
+<p>🕒 Open: 11 AM – 8PM (All Days)</p>
+  <div class="socials">
+    <a href="https://www.instagram.com/_gllow_beauty_salon_?igsh=MWc0cTFhaWJvcHBlYQ==" target="_blank">Instagram</a>
+    <a href="https://wa.me/919819545630" target="_blank">WhatsApp</a>
+    <a href="https://maps.app.goo.gl/AGz8FnccqGcKP7ES8" target="_blank">Location</a>
+  </div>
+  <p class="copy">© 2026 Gllow Beauty Salon & Academy</p>
+</footer>
+
+<script>
+function scrollTopFunc() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function toggleNav() { document.getElementById("navLinks").classList.toggle("open"); }
+</script>
+</body>
+</html>

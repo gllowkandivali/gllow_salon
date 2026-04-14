@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration — Gllow Academy</title>
+  <meta name="description" content="Join Gllow Beauty Academy courses and build your career in beauty industry.">
+  <meta property="og:title" content="Register — Gllow Academy">
+  <meta property="og:image" content="{{ url_for('static', filename='images/logo.jpeg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="/" class="logo">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Gllow Salon Logo">
+    <span>Gllow Beauty Salon & Academy</span>
+  </a>
+  <div class="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="/">Home</a>
+    <a href="/courses">Courses</a>
+    <a href="/register">Register</a>
+    <a href="/booking" class="btn-nav">Book Now</a>
+  </div>
+</nav>
+
+<!-- FORM -->
+<div class="container">
+  <p class="section-label">Gllow Academy</p>
+  <h1 class="section-title">Start Your <em>Career</em> With Us</h1>
+  <div class="rule"></div>
+  <p class="section-sub text-center">Limited seats available — enroll now</p>
+
+  <form action="/register_submit" method="POST" onsubmit="showSuccess()">
+
+    <label>Full Name</label>
+    <input type="text" name="name" placeholder="Enter your full name" required>
+
+    <label>Phone Number</label>
+    <input type="tel" name="phone" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+
+    <label>Email Address</label>
+    <input type="email" name="email" placeholder="you@email.com" required>
+
+    <label>Select Course</label>
+    <select name="course" required>
+      <option value="">— Select a Course —</option>
+      <option>1 Day Self-Makeup Course</option>
+      <option>Basic Beauty Course</option>
+      <option>Advanced Beauty Course</option>
+      <option>Professional Hair Course</option>
+      <option>Nail Art Course</option>
+      <option>Advanced Nail Art Course</option>
+      <option>Salon Management Course</option>
+    </select>
+
+    <label>Preferred Batch</label>
+    <select name="batch">
+      <option>Morning</option>
+      <option>Afternoon</option>
+      <option>Evening</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary" style="margin-top:24px; width:100%; font-size:14px; padding:16px;">
+      Register Now
+    </button>
+
+  </form>
+</div>
+
+<!-- FLOATING -->
+<a href="https://wa.me/919819545630" class="floating-whatsapp" target="_blank">💬</a>
+<button onclick="scrollTopFunc()" class="top-btn">↑</button>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h2>Gllow Beauty Salon & Academy</h2>
+  <p>Learn. Grow. Shine.</p>
+  <p>📞 +91 98195 45630</p>
+<p>📍 Shop No 1, Vardhaman Kutir, Shankar Lane, Kandivali West, Mumbai</p>
+<p>🕒 Open: 101 AM – 8 PM (All Days)</p>
+  <div class="socials">
+    <a href="https://www.instagram.com/_gllow_beauty_salon_?igsh=MWc0cTFhaWJvcHBlYQ==" target="_blank">Instagram</a>
+    <a href="https://wa.me/919819545630" target="_blank">WhatsApp</a>
+  </div>
+  <p class="copy">© 2026 Gllow Beauty Salon & Academy</p>
+</footer>
+
+<script>
+function scrollTopFunc() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function toggleNav() { document.getElementById("navLinks").classList.toggle("open"); }
+function showSuccess() {
+  setTimeout(() => alert("Registration submitted! 🎓 We will contact you soon."), 100);
+}
+</script>
+</body>
+</html>
